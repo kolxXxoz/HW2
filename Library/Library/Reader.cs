@@ -38,14 +38,17 @@ namespace Library
             return $"{Name} {Surname}";
         }
 
-        public void PrintInfo()
+        public virtual string[] GetInfo()
         {
-            Console.WriteLine($"{this} ({Number})\nСписок взятой литературы:");
+            var info = new string[3];
+            info[0] = ToString() + $" ({Number})";
+            info[1] = "Список взятой литературы:";
 
             foreach (var i in Literature)
-                Console.WriteLine($"\t{i}");
+                info[1] += $"\n\t{i}";
 
-            Console.WriteLine($"Дата выдачи: {StartDate}. Срок выдачи: {Span}. Предполагаемая дата возврата: {EndDate}. Сумма залога: {Pawn}");
+            info[2] = $"Дата выдачи: {StartDate:d}. Срок выдачи: {Span.Days} дней. Предполагаемая дата возврата: {EndDate:d}. Сумма залога: {Pawn} йен";
+            return info;
         }
     }
 }
